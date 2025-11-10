@@ -1,0 +1,142 @@
+{
+  "name": "Meta Workflaw",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "triggerAtHour": 19
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0],
+      "id": "fe191e9e-f427-4380-bf2b-a59e00f46566",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "url": "http://host.docker.internal:5000/run-report",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [352, 0],
+      "id": "4d766445-d757-4760-a455-24e497fd0e41",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "sendTo": "******@gmail.com",
+        "subject": "Report of metrics",
+        "message": "Please see the attached metrics report ",
+        "options": {
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {
+                "property": "=data"
+              }
+            ]
+          }
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [720, 0],
+      "id": "db067431-0713-4e84-9d79-fd3b31f153ab",
+      "name": "Send a message",
+      "webhookId": "********-****-****-****-************",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "***************",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Triger node \nIn this node we will set up daily triger to execute node every day at the exact time in order to execute workflow ",
+        "height": 256,
+        "width": 400
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [-208, -128],
+      "typeVersion": 1,
+      "id": "f45d8eeb-0500-4cd9-b336-b16302ecd128",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## Executor\nWith this node we will execute http request so we can start the app and collect the necessary info ",
+        "height": 256,
+        "width": 272,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [256, -128],
+      "typeVersion": 1,
+      "id": "def563af-bcf0-46d0-b880-2b8ce0199e54",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Send node \nNode to send email with the attachment of the executed workflow and fetched info from the main code",
+        "height": 256,
+        "width": 352
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [592, -128],
+      "typeVersion": 1,
+      "id": "3df7667e-758d-4d21-bcaf-71ae2a66d956",
+      "name": "Sticky Note2"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [[]]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "********-****-****-****-************",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "********************************************************"
+  },
+  "id": "********************",
+  "tags": []
+}
