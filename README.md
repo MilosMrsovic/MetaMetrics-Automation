@@ -1,5 +1,7 @@
 # Meta Ads Insights Automation
 
+Built by [Heaq Digital](https://heaqdigital.com), an automation studio for US service businesses. Full write-up: All projects https://heaqdigital.com/projects
+
 This small Python script automatically connects to the Meta (Facebook) Ads API and pulls campaign data for the last 7 days. It basically grabs all the important stuff like:
 
 - Campaign name
